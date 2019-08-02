@@ -68,25 +68,13 @@ namespace CustomUI.Settings
 
         public void PageScrollUp()
         {
-            _targetPosition = _contentTransform.anchoredPosition.y - Mathf.Max(1f, table.visibleCells.Count() - 1f) * _cellSize;
-            if (_targetPosition < 0f)
-            {
-                _targetPosition = 0f;
-            }
-            table.enabled = true;
+            scroller.PageScrollUp();
             RefreshScrollButtons();
         }
 
         public void PageScrollDown()
         {
-            float num = _scrollRectTransform.rect.height;
-            float num2 = (float)_numberOfCells * _cellSize - num;
-            _targetPosition = _contentTransform.anchoredPosition.y + Mathf.Max(1f, table.visibleCells.Count() - 1f) * this._cellSize;
-            if (_targetPosition > num2)
-            {
-                _targetPosition = num2;
-            }
-            table.enabled = true;
+            scroller.PageScrollDown();
             RefreshScrollButtons();
             //_scrollRectTransform.sizeDelta = new Vector2(-20f, -10f);
         }
