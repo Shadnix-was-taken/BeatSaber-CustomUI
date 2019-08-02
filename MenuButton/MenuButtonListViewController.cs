@@ -78,7 +78,7 @@ namespace CustomUI.MenuButton
             return (int)Math.Ceiling((float)buttons.Count / buttonsPerRow);
         }
 
-        public override TableCell CellForIdx(int row)
+        public override TableCell CellForIdx(TableView tableView, int row)
         {
             TableCell _tableCell = Instantiate(_modListTableCellInstance);
 

@@ -100,9 +100,9 @@ namespace CustomUI.Settings
 
 
                 pageUpButton.onClick.RemoveAllListeners();
-                pageUpButton.onClick.AddListener(() => _customListTableView.PageScrollUp());
+                pageUpButton.onClick.AddListener(() => _customListTableViewScroller.PageScrollUp());
                 pageDownButton.onClick.RemoveAllListeners();
-                pageDownButton.onClick.AddListener(() => _customListTableView.PageScrollDown());
+                pageDownButton.onClick.AddListener(() => _customListTableViewScroller.PageScrollDown());
 
                 // And finally, show/hide the buttons depending on whether or not we have enough menu options
                 pageUpButton.gameObject.SetActive(_submenuOptions.Count > _maxOptionsPerPage);
@@ -135,7 +135,7 @@ namespace CustomUI.Settings
             return _submenuOptions.Count();
         }
 
-        public override TableCell CellForIdx(int row)
+        public override TableCell CellForIdx(TableView tableView, int row)
         {
             Vector2 cellSize = new Vector2(_settingsViewControllerWidth - _settingsViewControllerPadding*2, _rowHeight);
             TableCell _tableCell = _customListTableView.DequeueReusableCellForIdentifier("CustomUISettingsTableCell");

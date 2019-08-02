@@ -32,7 +32,7 @@ namespace CustomUI.BeatSaber
         /// The TableView associated with the current CustomListViewController.
         /// </summary>
         public TableView _customListTableView;
-
+        public TableViewScroller _customListTableViewScroller;
         /// <summary>
         /// The data to be displayed in the table.
         /// </summary>
@@ -82,8 +82,11 @@ namespace CustomUI.BeatSaber
                     (_customListTableView.transform as RectTransform).anchoredPosition = new Vector3(0f, 0f);
 
                     _customListTableView.dataSource = this;
+                    _customListTableViewScroller = newGameObj.AddComponent<TableViewScroller>();
+                    _customListTableViewScroller.Init(_customListTableView);
                     newGameObj.SetActive(true);
 
+                    
                     _customListTableView.didSelectCellWithIdxEvent += _customListTableView_didSelectRowEvent;
 
                     if (includePageButtons)
@@ -95,7 +98,7 @@ namespace CustomUI.BeatSaber
                             _pageUpButton.interactable = true;
                             _pageUpButton.onClick.AddListener(delegate ()
                             {
-                                _customListTableView.PageScrollUp();
+                                _customListTableViewScroller.PageScrollUp();
                             });
                         }
 
@@ -106,7 +109,7 @@ namespace CustomUI.BeatSaber
                             _pageDownButton.interactable = true;
                             _pageDownButton.onClick.AddListener(delegate ()
                             {
-                                _customListTableView.PageScrollDown();
+                                _customListTableViewScroller.PageScrollDown();
                             });
                         }
                     }
@@ -173,7 +176,7 @@ namespace CustomUI.BeatSaber
             return _tableCell;
         }
 
-        public virtual TableCell CellForIdx(int idx)
+        public virtual TableCell CellForIdx(TableView tableView, int idx)
         {
             LevelListTableCell _tableCell = GetTableCell();
 

@@ -13,7 +13,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using VRUI;
 using Image = UnityEngine.UI.Image;
-using static HMUI.Scrollbar;
+using static HMUI.VerticalScrollIndicator;
 using System.Collections;
 
 namespace CustomUI.Settings

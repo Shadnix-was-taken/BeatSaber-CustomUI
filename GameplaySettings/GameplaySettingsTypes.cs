@@ -184,7 +184,7 @@ namespace CustomUI.GameplaySettings
             {
                 if (_tmpText.text != "!NOTSET!")
                 {
-                    _tmpText.text = _toggle.gameplayModifier.modifierName;
+                    _tmpText.text = _toggle.gameplayModifier.modifierNameLocalizationKey;
                     Destroy(this);
                 }
             }
@@ -232,8 +232,8 @@ namespace CustomUI.GameplaySettings
                 currentToggle.name = optionName;
 
                 GameplayModifierParamsSO _gameplayModifier = ScriptableObject.CreateInstance<GameplayModifierParamsSO>();
-                _gameplayModifier.SetPrivateField("_modifierName", optionName);
-                _gameplayModifier.SetPrivateField("_hintText", hintText);
+                _gameplayModifier.SetPrivateField("_modifierNameLocalizationKey", optionName);
+                _gameplayModifier.SetPrivateField("_descriptionLocalizationKey", hintText);
                 _gameplayModifier.SetPrivateField("_multiplier", multiplier);
                 _gameplayModifier.SetPrivateField("_icon", optionIcon == null ? UIUtilities.BlankSprite : optionIcon);
                 currentToggle.SetPrivateField("_gameplayModifier", _gameplayModifier);
@@ -241,10 +241,14 @@ namespace CustomUI.GameplaySettings
                 if (hintText != String.Empty)
                 {
                     HoverHint hoverHint = currentToggle.GetPrivateField<HoverHint>("_hoverHint");
+                    if(hoverHint)
+                    {
                     hoverHint.text = hintText;
                     hoverHint.name = optionName;
                     HoverHintController hoverHintController = Resources.FindObjectsOfTypeAll<HoverHintController>().First();
                     hoverHint.SetPrivateField("_hoverHintController", hoverHintController);
+                    }
+
                 }
             }
             initialized = true;
@@ -252,13 +256,13 @@ namespace CustomUI.GameplaySettings
 
         private void InitializeConflict(GameplayModifierToggle toMod, GameplayModifierToggle conflict, bool recursive = true)
         {
-            string conflictingDisplayName = $" {conflict.gameplayModifier.modifierName} ";
-            if (!toMod.gameplayModifier.hintText.Contains(ConflictText))
-                toMod.gameplayModifier.SetPrivateField("_hintText", toMod.gameplayModifier.hintText + ConflictText);
+            string conflictingDisplayName = $" {conflict.gameplayModifier.modifierNameLocalizationKey} ";
+            if (!toMod.gameplayModifier.descriptionLocalizationKey.Contains(ConflictText))
+                toMod.gameplayModifier.SetPrivateField("_descriptionLocalizationKey", toMod.gameplayModifier.descriptionLocalizationKey + ConflictText);
 
-            if (!toMod.gameplayModifier.hintText.Contains(conflictingDisplayName))
+            if (!toMod.gameplayModifier.descriptionLocalizationKey.Contains(conflictingDisplayName))
             {
-                toMod.gameplayModifier.SetPrivateField("_hintText", toMod.gameplayModifier.hintText + conflictingDisplayName);
+                toMod.gameplayModifier.SetPrivateField("_descriptionLocalizationKey", toMod.gameplayModifier.descriptionLocalizationKey + conflictingDisplayName);
                 toMod.toggle.onValueChanged.AddListener((e) => { if (e) conflict.toggle.isOn = false; });
             }
             if (recursive)
@@ -273,7 +277,7 @@ namespace CustomUI.GameplaySettings
 
             foreach (GameplayModifierToggle conflictToggle in Resources.FindObjectsOfTypeAll<GameplayModifierToggle>())
             {
-                if (!conflicts.Contains(conflictToggle.gameplayModifier.modifierName)) continue;
+                if (!conflicts.Contains(conflictToggle.gameplayModifier.modifierNameLocalizationKey)) continue;
 
                 // Setup our hint text and onValueChanged callbacks for the conflicting modifiers
                 InitializeConflict(conflictToggle, currentToggle);

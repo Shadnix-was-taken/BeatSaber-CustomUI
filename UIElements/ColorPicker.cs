@@ -147,13 +147,13 @@ namespace CustomUI.UIElements
             _currentColor = color;
             ColorPickerPreview.ImagePreview.color = color;
             _sliderR.CurrentValue = color.r * 255f;
-            _sliderR.Scrollbar.Set(_sliderR.GetPercentageFromCurrentValue());
+            _sliderR.Scrollbar.SetNormalizedValue(_sliderR.GetPercentageFromCurrentValue());
             _sliderG.CurrentValue = color.g * 255f;
-            _sliderG.Scrollbar.Set(_sliderG.GetPercentageFromCurrentValue());
+            _sliderG.Scrollbar.SetNormalizedValue(_sliderG.GetPercentageFromCurrentValue());
             _sliderB.CurrentValue = color.b * 255f;
-            _sliderB.Scrollbar.Set(_sliderB.GetPercentageFromCurrentValue());
+            _sliderB.Scrollbar.SetNormalizedValue(_sliderB.GetPercentageFromCurrentValue());
             _sliderA.CurrentValue = color.a * 255f;
-            _sliderA.Scrollbar.Set(_sliderA.GetPercentageFromCurrentValue());
+            _sliderA.Scrollbar.SetNormalizedValue(_sliderA.GetPercentageFromCurrentValue());
         }
 
         /// <summary>
