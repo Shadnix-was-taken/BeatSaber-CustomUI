@@ -350,7 +350,7 @@ namespace CustomUI.BeatSaber
         {
             CustomSlider slider = new GameObject("CustomUISlider").AddComponent<CustomSlider>();
             GameObject.DontDestroyOnLoad(slider.gameObject);
-            slider.Scrollbar = GameObject.Instantiate(Resources.FindObjectsOfTypeAll<HMUI.Scrollbar>().First(s => s.name != "CustomUISlider"), parent, false);
+            slider.Scrollbar = GameObject.Instantiate(Resources.FindObjectsOfTypeAll<HMUI.RangeValuesTextSlider>().First(s => s.name != "CustomUISlider"), parent, false);
             slider.Scrollbar.name = "CustomUISlider";
             slider.Scrollbar.transform.SetParent(parent, false);
 
@@ -361,18 +361,20 @@ namespace CustomUI.BeatSaber
             slider.IsIntValue = intValues;
             slider.SetCurrentValueFromPercentage(slider.Scrollbar.value);
             slider.Scrollbar.GetComponentInChildren<TextMeshProUGUI>().text = slider.CurrentValue.ToString("N1");
-            slider.Scrollbar.onValueChanged.RemoveAllListeners();
-            slider.Scrollbar.onValueChanged.AddListener(delegate (float value) {
+         //   slider.Scrollbar.onValueChanged.RemoveAllListeners();
+         /*
+            slider.Scrollbar.valueDidChangeEvent += delegate (RangeValuesTextSlider rangeValuesTextSlider, float value) {
                 TextMeshProUGUI valueLabel = slider.Scrollbar.GetComponentInChildren<TextMeshProUGUI>();
                 valueLabel.enableWordWrapping = false;
                 slider.SetCurrentValueFromPercentage(value);
                 valueLabel.text = slider.CurrentValue.ToString("N1");
             });
             if (onValueChanged != null)
-                slider.Scrollbar.onValueChanged.AddListener((percent) => 
+                slider.Scrollbar.value.AddListener((percent) => 
                 {
                     onValueChanged?.Invoke(slider.GetValueFromPercentage(percent));
                 });
+                */
             return slider;
         }
 

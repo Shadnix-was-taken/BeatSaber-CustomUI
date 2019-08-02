@@ -264,7 +264,7 @@ namespace CustomUI.Settings
             GameObject.Destroy(newSettingsObject.transform.Find("Value").Find("IncButton").gameObject);
 
             CustomSlider slider = newSliderSettingsController.gameObject.AddComponent<CustomSlider>();
-            slider.Scrollbar = GameObject.Instantiate(Resources.FindObjectsOfTypeAll<HMUI.Scrollbar>().First(s => s.name != "CustomUISlider"), newSettingsObject.transform.Find("Value"), false);
+            slider.Scrollbar = GameObject.Instantiate(Resources.FindObjectsOfTypeAll<HMUI.TimeSlider>().First(s => s.name != "CustomUISlider"), newSettingsObject.transform.Find("Value"), false);
             slider.Scrollbar.name = "CustomUISlider";
             slider.Scrollbar.GetComponentInChildren<TextMeshProUGUI>().enableWordWrapping = false;
             (slider.Scrollbar.transform as RectTransform).sizeDelta = new Vector2(39.5f, 4.5f);

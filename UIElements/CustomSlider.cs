@@ -11,7 +11,7 @@ namespace CustomUI.UIElements
 {
     public class CustomSlider : MonoBehaviour
     {
-        public HMUI.Scrollbar Scrollbar;
+        public HMUI.RangeValuesTextSlider Scrollbar;
         public float MinValue;
         public float MaxValue;
         public float CurrentValue;

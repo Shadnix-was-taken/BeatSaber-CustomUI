@@ -427,11 +427,11 @@ namespace CustomUI.Settings
             lastVal = GetInitValue();
             _textInst = _sliderInst.Scrollbar.GetComponentInChildren<TMPro.TextMeshProUGUI>();
             _sliderInst.Scrollbar.value = _sliderInst.GetPercentageFromValue(_sliderInst.CurrentValue);
-            _sliderInst.Scrollbar.onValueChanged.AddListener(delegate (float value) {
+            _sliderInst.Scrollbar.normalizedValueDidChangeEvent += delegate (TextSlider TextSlider, float value) {
                 _sliderInst.SetCurrentValueFromPercentage(value);
                 ApplyValue(_sliderInst.CurrentValue);
                 RefreshUI();
-            });
+            };
             RefreshUI();
             IsInitialized = true;
         }

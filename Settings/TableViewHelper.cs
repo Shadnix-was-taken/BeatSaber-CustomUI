@@ -13,6 +13,7 @@ namespace CustomUI.Settings
     public class TableViewHelper : MonoBehaviour
     {
         TableView table;
+        TableViewScroller scroller;
         RectTransform viewport;
 
         public Button _pageUpButton = null;
@@ -38,8 +39,8 @@ namespace CustomUI.Settings
 
         float _targetPosition
         {
-            get { return table.GetPrivateField<float>("_targetPosition"); }
-            set { table.SetPrivateField("_targetPosition", value); }
+            get { return scroller.GetPrivateField<float>("_targetPosition"); }
+            set { scroller.SetPrivateField("_targetPosition", value); }
         }
 
 
@@ -53,6 +54,7 @@ namespace CustomUI.Settings
         {
             DontDestroyOnLoad(this.gameObject);
             table = GetComponent<TableView>();
+            scroller = table.GetComponent<TableViewScroller>();
             viewport = GetComponentsInChildren<RectTransform>().First(x => x.name == "Viewport");
             ScrollToTop();
         }

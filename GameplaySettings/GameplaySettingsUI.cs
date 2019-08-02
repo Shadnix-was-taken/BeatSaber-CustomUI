@@ -274,7 +274,7 @@ namespace CustomUI.GameplaySettings
             //Grab necessary references
             SoloFreePlayFlowCoordinator sfpfc = Resources.FindObjectsOfTypeAll<SoloFreePlayFlowCoordinator>().First();
             GameplaySetupViewController gsvc = sfpfc.GetField<GameplaySetupViewController>("_gameplaySetupViewController");
-            
+
             //Get reference to the switch container
             RectTransform page = (RectTransform)gsvc.transform.Find(pageName);
             Destroy(page.gameObject.GetComponent<HorizontalLayoutGroup>());
@@ -287,7 +287,7 @@ namespace CustomUI.GameplaySettings
                 fitter.horizontalFit = ContentSizeFitter.FitMode.Unconstrained;
                 fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
             }
-
+            /*
             // Make the player height option the same height as other options
             var height = _panelContainer.Find("PlayerHeight");
             if (height)
@@ -310,6 +310,7 @@ namespace CustomUI.GameplaySettings
                 var reset = height.Find("ResetButton");
                 reset.localScale = new Vector3(0.6f, 0.6f, 0.6f);
             }
+            */
            
             if (!initialized)
             {
@@ -327,7 +328,7 @@ namespace CustomUI.GameplaySettings
                 _pageUpButton = Instantiate(Resources.FindObjectsOfTypeAll<Button>().Last(x => (x.name == "PageUpButton")), _panelContainer);
                 _pageUpButton.transform.SetParent(_panelContainer.parent);
                 _pageUpButton.transform.localScale = Vector3.one / 2;
-                _pageUpButton.transform.localPosition = new Vector3(_pageUpButton.transform.localPosition.x,  -2.2f, _pageUpButton.transform.localPosition.z);
+                _pageUpButton.transform.localPosition = new Vector3(_pageUpButton.transform.localPosition.x,  2.2f, _pageUpButton.transform.localPosition.z);
                 _pageUpButton.interactable = true;
                 //(_pageUpButton.transform as RectTransform).sizeDelta = new Vector2((_pageUpButton.transform.parent as RectTransform).sizeDelta.x, 3.5f);
                 _pageUpButton.onClick.RemoveAllListeners();
@@ -340,7 +341,7 @@ namespace CustomUI.GameplaySettings
                 _pageDownButton = Instantiate(Resources.FindObjectsOfTypeAll<Button>().Last(x => (x.name == "PageDownButton")), _panelContainer);
                 _pageDownButton.transform.SetParent(_panelContainer.parent);
                 _pageDownButton.transform.localScale = Vector3.one / 2;
-                _pageDownButton.transform.localPosition = new Vector3(_pageDownButton.transform.localPosition.x, -(numDefaultOptions * 8.5f), _pageDownButton.transform.localPosition.z);
+                _pageDownButton.transform.localPosition = new Vector3(_pageDownButton.transform.localPosition.x, -((numDefaultOptions + 0.6f) * 8.5f), _pageDownButton.transform.localPosition.z);
                 _pageDownButton.interactable = true;
                 //(_pageDownButton.transform as RectTransform).sizeDelta = new Vector2((_pageDownButton.transform.parent as RectTransform).sizeDelta.x, (_pageDownButton.transform as RectTransform).sizeDelta.y);
                 _pageDownButton.onClick.RemoveAllListeners();
