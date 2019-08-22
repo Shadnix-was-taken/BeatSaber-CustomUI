@@ -99,10 +99,10 @@ namespace CustomUI.Settings
                 (pageDownButton.transform as RectTransform).anchoredPosition = new Vector2(0f, -listHeight / 2 - 1.25f + _settingsViewControllerPadding);
 
 
-                pageUpButton.onClick.RemoveAllListeners();
+                /*pageUpButton.onClick.RemoveAllListeners();
                 pageUpButton.onClick.AddListener(() => _customListTableViewScroller.PageScrollUp());
                 pageDownButton.onClick.RemoveAllListeners();
-                pageDownButton.onClick.AddListener(() => _customListTableViewScroller.PageScrollDown());
+                pageDownButton.onClick.AddListener(() => _customListTableViewScroller.PageScrollDown());*/
 
                 // And finally, show/hide the buttons depending on whether or not we have enough menu options
                 pageUpButton.gameObject.SetActive(_submenuOptions.Count > _maxOptionsPerPage);

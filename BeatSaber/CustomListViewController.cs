@@ -32,7 +32,6 @@ namespace CustomUI.BeatSaber
         /// The TableView associated with the current CustomListViewController.
         /// </summary>
         public TableView _customListTableView;
-        public TableViewScroller _customListTableViewScroller;
         /// <summary>
         /// The data to be displayed in the table.
         /// </summary>
@@ -74,6 +73,11 @@ namespace CustomUI.BeatSaber
 
                     _customListTableView.SetPrivateField("_preallocatedCells", new TableView.CellsGroup[0]);
                     _customListTableView.SetPrivateField("_isInitialized", false);
+
+                    var viewport = new GameObject("Viewport").AddComponent<RectTransform>();
+                    viewport.SetParent(newGameObj.GetComponent<RectTransform>(), false);
+                    newGameObj.GetComponent<ScrollRect>().viewport = viewport;
+
                     _customListTableView.Init();
 
                     (_customListTableView.transform as RectTransform).anchorMin = new Vector2(0f, 0f);
@@ -81,15 +85,18 @@ namespace CustomUI.BeatSaber
                     (_customListTableView.transform as RectTransform).sizeDelta = new Vector2(0f, 60f);
                     (_customListTableView.transform as RectTransform).anchoredPosition = new Vector3(0f, 0f);
 
-                    _customListTableView.dataSource = this;
-                    _customListTableViewScroller = newGameObj.AddComponent<TableViewScroller>();
-                    _customListTableViewScroller.Init(_customListTableView);
+                    // when this errors, _scrollRectTransform is null because scrollRect.viewport was null
+                    // this is fixed
+                    _customListTableView.dataSource = this; // calls Init
+
+
+
                     newGameObj.SetActive(true);
 
                     
                     _customListTableView.didSelectCellWithIdxEvent += _customListTableView_didSelectRowEvent;
 
-                    if (includePageButtons)
+                    /*if (includePageButtons)
                     {
                         if (_pageUpButton == null)
                         {
@@ -112,7 +119,7 @@ namespace CustomUI.BeatSaber
                                 _customListTableViewScroller.PageScrollDown();
                             });
                         }
-                    }
+                    }*/
                 }
                 base.DidActivate(firstActivation, type);
             }
