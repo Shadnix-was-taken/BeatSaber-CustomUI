@@ -76,6 +76,7 @@ namespace CustomUI.BeatSaber
 
                     var viewport = new GameObject("Viewport").AddComponent<RectTransform>();
                     viewport.SetParent(newGameObj.GetComponent<RectTransform>(), false);
+                    (viewport.transform as RectTransform).sizeDelta = new Vector2(60, 60);
                     newGameObj.GetComponent<ScrollRect>().viewport = viewport;
 
                     _customListTableView.Init();
@@ -96,30 +97,31 @@ namespace CustomUI.BeatSaber
                     
                     _customListTableView.didSelectCellWithIdxEvent += _customListTableView_didSelectRowEvent;
 
-                    /*if (includePageButtons)
+                    TableViewScroller _customListTableViewScroller = _customListTableView.GetPrivateField<TableViewScroller>("_scroller");
+                    if (includePageButtons)
                     {
                         if (_pageUpButton == null)
                         {
                             _pageUpButton = Instantiate(Resources.FindObjectsOfTypeAll<Button>().Last(x => (x.name == "PageUpButton")), container, false);
-                            (_pageUpButton.transform as RectTransform).anchoredPosition = new Vector2(0f, 30f);
+                            (_pageUpButton.transform as RectTransform).anchoredPosition = new Vector2(0f, 40f);
                             _pageUpButton.interactable = true;
                             _pageUpButton.onClick.AddListener(delegate ()
                             {
-                                _customListTableViewScroller.PageScrollUp();
+                                _customListTableViewScroller.PageScrollDown();
                             });
                         }
 
                         if (_pageDownButton == null)
                         {
                             _pageDownButton = Instantiate(Resources.FindObjectsOfTypeAll<Button>().Last(x => (x.name == "PageDownButton")), container, false);
-                            (_pageDownButton.transform as RectTransform).anchoredPosition = new Vector2(0f, -30f);
+                            (_pageDownButton.transform as RectTransform).anchoredPosition = new Vector2(0f, -40f);
                             _pageDownButton.interactable = true;
                             _pageDownButton.onClick.AddListener(delegate ()
                             {
-                                _customListTableViewScroller.PageScrollDown();
+                                _customListTableViewScroller.PageScrollUp();
                             });
                         }
-                    }*/
+                    }
                 }
                 base.DidActivate(firstActivation, type);
             }
