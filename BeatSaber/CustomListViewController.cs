@@ -107,7 +107,7 @@ namespace CustomUI.BeatSaber
                             _pageUpButton.interactable = true;
                             _pageUpButton.onClick.AddListener(delegate ()
                             {
-                                _customListTableViewScroller.PageScrollDown();
+                                _customListTableViewScroller.PageScrollUp();
                             });
                         }
 
@@ -118,7 +118,7 @@ namespace CustomUI.BeatSaber
                             _pageDownButton.interactable = true;
                             _pageDownButton.onClick.AddListener(delegate ()
                             {
-                                _customListTableViewScroller.PageScrollUp();
+                                _customListTableViewScroller.PageScrollDown();
                             });
                         }
                     }
