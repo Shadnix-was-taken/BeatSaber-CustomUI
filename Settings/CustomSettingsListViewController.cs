@@ -89,6 +89,8 @@ namespace CustomUI.Settings
                     // Fit the tableview to our window
                     (_customListTableView.transform.parent as RectTransform).sizeDelta = new Vector2(_settingsViewControllerWidth, 0);
 
+                    (_customListTableView.transform.Find("Viewport").transform as RectTransform).sizeDelta = new Vector2(_settingsViewControllerWidth, listHeight);
+
                 }
                 // Attach the page buttons to the current settings page
                 pageUpButton.transform.SetParent(rectTransform.Find("CustomListContainer"));
