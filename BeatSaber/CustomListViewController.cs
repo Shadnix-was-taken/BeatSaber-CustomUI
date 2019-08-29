@@ -33,6 +33,10 @@ namespace CustomUI.BeatSaber
         /// </summary>
         public TableView _customListTableView;
         /// <summary>
+        /// The TableViewScroller associated with the current CustomListViewController.
+        /// </summary>
+        public TableViewScroller _customListTableViewScroller;
+        /// <summary>
         /// The data to be displayed in the table.
         /// </summary>
         public List<CustomCellInfo> Data = new List<CustomCellInfo>();
@@ -97,7 +101,7 @@ namespace CustomUI.BeatSaber
                     
                     _customListTableView.didSelectCellWithIdxEvent += _customListTableView_didSelectRowEvent;
 
-                    TableViewScroller _customListTableViewScroller = _customListTableView.GetPrivateField<TableViewScroller>("_scroller");
+                    _customListTableViewScroller = _customListTableView.GetPrivateField<TableViewScroller>("_scroller");
                     if (includePageButtons)
                     {
                         if (_pageUpButton == null)
