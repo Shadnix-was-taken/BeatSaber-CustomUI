@@ -80,7 +80,9 @@ namespace CustomUI.BeatSaber
 
                     var viewport = new GameObject("Viewport").AddComponent<RectTransform>();
                     viewport.SetParent(newGameObj.GetComponent<RectTransform>(), false);
-                    (viewport.transform as RectTransform).sizeDelta = new Vector2(60, 60);
+                    (viewport.transform as RectTransform).sizeDelta = new Vector2(0, 0);
+                    (viewport.transform as RectTransform).anchorMin = new Vector2(0, 0);
+                    (viewport.transform as RectTransform).anchorMax = new Vector2(1, 1);
                     newGameObj.GetComponent<ScrollRect>().viewport = viewport;
 
                     _customListTableView.Init();
