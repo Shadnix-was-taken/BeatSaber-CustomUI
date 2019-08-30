@@ -94,14 +94,13 @@ namespace CustomUI.Settings
                 pageDownButton.transform.SetParent(rectTransform.Find("CustomListContainer"));
 
                 // Move the page buttons depending on how many options there are
-                (pageUpButton.transform as RectTransform).anchoredPosition = new Vector2(0f, listHeight / 2 + 1.25f + _settingsViewControllerPadding);
-                (pageDownButton.transform as RectTransform).anchoredPosition = new Vector2(0f, -listHeight / 2 - 1.25f + _settingsViewControllerPadding);
+                (pageUpButton.transform as RectTransform).anchoredPosition = new Vector2(0f, listHeight / 2 + 7.25f + _settingsViewControllerPadding);
+                (pageDownButton.transform as RectTransform).anchoredPosition = new Vector2(0f, -listHeight / 2 - 7.25f + _settingsViewControllerPadding);
 
-
-                /*pageUpButton.onClick.RemoveAllListeners();
+                pageUpButton.onClick.RemoveAllListeners();
                 pageUpButton.onClick.AddListener(() => _customListTableViewScroller.PageScrollUp());
                 pageDownButton.onClick.RemoveAllListeners();
-                pageDownButton.onClick.AddListener(() => _customListTableViewScroller.PageScrollDown());*/
+                pageDownButton.onClick.AddListener(() => _customListTableViewScroller.PageScrollDown());
 
                 // And finally, show/hide the buttons depending on whether or not we have enough menu options
                 pageUpButton.gameObject.SetActive(_submenuOptions.Count > _maxOptionsPerPage);
