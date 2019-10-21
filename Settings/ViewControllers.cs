@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using TMPro;
 using HMUI;
+using System.Collections;
 
 namespace CustomUI.Settings
 {
@@ -426,7 +427,7 @@ namespace CustomUI.Settings
             _sliderInst.CurrentValue = GetInitValue();
             lastVal = GetInitValue();
             _textInst = _sliderInst.Scrollbar.GetComponentInChildren<TMPro.TextMeshProUGUI>();
-            _sliderInst.Scrollbar.value = _sliderInst.GetPercentageFromValue(_sliderInst.CurrentValue);
+            _sliderInst.Scrollbar.normalizedValue = _sliderInst.GetPercentageFromValue(_sliderInst.CurrentValue);
             _sliderInst.Scrollbar.normalizedValueDidChangeEvent += delegate (TextSlider TextSlider, float value) {
                 _sliderInst.SetCurrentValueFromPercentage(value);
                 ApplyValue(_sliderInst.CurrentValue);
@@ -434,6 +435,23 @@ namespace CustomUI.Settings
             };
             RefreshUI();
             IsInitialized = true;
+        }
+
+        protected override void OnEnable()
+        {
+            StartCoroutine(SetInitialText());
+
+            if (IsInitialized)
+                base.OnEnable();
+        }
+
+        // temporary fix, lifted from BSML until it can be properly fixed, or CustomUI is phased out
+        IEnumerator SetInitialText()
+        {
+            yield return new WaitForFixedUpdate();
+            RefreshUI();
+            yield return new WaitForSeconds(0.1f);
+            RefreshUI();
         }
 
         public void ApplySettings()
@@ -488,7 +506,7 @@ namespace CustomUI.Settings
         public void CancelSettings()
         {
             lastVal = GetInitValue();
-            _sliderInst.Scrollbar.value = _sliderInst.GetPercentageFromValue(lastVal);
+            _sliderInst.Scrollbar.normalizedValue = _sliderInst.GetPercentageFromValue(lastVal);
         }
     }
 

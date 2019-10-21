@@ -272,8 +272,8 @@ namespace CustomUI.Settings
 
 
             slider.Scrollbar.numberOfSteps = (int)((max - min) / increment) + 1;
-            slider.MinValue = min;
-            slider.MaxValue = max;
+            slider.MinValue = slider.Scrollbar.minValue = min;
+            slider.MaxValue = slider.Scrollbar.maxValue = max;
             slider.IsIntValue = intValues;
 
             var tmpText = newSettingsObject.GetComponentInChildren<TMP_Text>();
