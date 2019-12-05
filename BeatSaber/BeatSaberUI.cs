@@ -355,10 +355,10 @@ namespace CustomUI.BeatSaber
 
             slider.Scrollbar.GetComponentInChildren<TextMeshProUGUI>().enableWordWrapping = false;
             slider.Scrollbar.numberOfSteps = (int)((max - min) / increment) + 1;
-            slider.MinValue = min;
-            slider.MaxValue = max;
+            slider.MinValue = slider.Scrollbar.minValue = min;
+            slider.MaxValue = slider.Scrollbar.maxValue = max;
             slider.IsIntValue = intValues;
-            slider.SetCurrentValueFromPercentage(slider.Scrollbar.value);
+            slider.SetCurrentValueFromPercentage(slider.Scrollbar.normalizedValue);
             slider.Scrollbar.GetComponentInChildren<TextMeshProUGUI>().text = slider.CurrentValue.ToString("N1");
          //   slider.Scrollbar.onValueChanged.RemoveAllListeners();
          /*
