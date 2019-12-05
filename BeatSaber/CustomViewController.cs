@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
-using VRUI;
+using HMUI;
 
 namespace CustomUI.BeatSaber
 {
-    public class CustomViewController : VRUIViewController
+    public class CustomViewController : ViewController
     {
         /// <summary>
         /// The event that's fired when the back button is pressed.
@@ -29,14 +29,14 @@ namespace CustomUI.BeatSaber
         /// <summary>
         /// The event that's fired when the CustomViewController is activated (when you open it).
         /// </summary>
-        public Action<bool, VRUIViewController.ActivationType> DidActivateEvent;
+        public Action<bool, ViewController.ActivationType> DidActivateEvent;
 
         /// <summary>
         /// The event that's fired when the CustomViewController is deactivated (when you close it).
         /// </summary>
-        public Action<VRUIViewController.DeactivationType> DidDeactivateEvent;
+        public Action<ViewController.DeactivationType> DidDeactivateEvent;
 
-        protected override void DidActivate(bool firstActivation, ActivationType type)
+        protected override void DidActivate(bool firstActivation, ViewController.ActivationType type)
         {
             if (firstActivation)
             {
@@ -53,7 +53,7 @@ namespace CustomUI.BeatSaber
             DidActivateEvent?.Invoke(firstActivation, type);
         }
 
-        protected override void DidDeactivate(DeactivationType type)
+        protected override void DidDeactivate(ViewController.DeactivationType type)
         {
             DidDeactivateEvent?.Invoke(type);
         }

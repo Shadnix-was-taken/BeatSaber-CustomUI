@@ -12,7 +12,7 @@
 //{
 //    class FavoriteColorsViewController : CustomListViewController
 //    {
-//        protected override void DidActivate(bool firstActivation, ActivationType type)
+//        protected override void DidActivate(bool firstActivation, ViewController.ActivationType type)
 //        {
 //            try
 //            {
@@ -28,7 +28,7 @@
 //            }
 //        }
 
-//        protected override void DidDeactivate(DeactivationType type)
+//        protected override void DidDeactivate(ViewController.DeactivationType type)
 //        {
 //            base.DidDeactivate(type);
 //        }

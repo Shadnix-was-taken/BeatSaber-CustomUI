@@ -56,7 +56,7 @@ namespace CustomUI.BeatSaber
         /// </summary>
         private LevelListTableCell _songListTableCellInstance;
 
-        protected override void DidActivate(bool firstActivation, ActivationType type)
+        protected override void DidActivate(bool firstActivation, ViewController.ActivationType type)
         {
             try
             {
@@ -137,7 +137,7 @@ namespace CustomUI.BeatSaber
             }
         }
 
-        protected override void DidDeactivate(DeactivationType type)
+        protected override void DidDeactivate(ViewController.DeactivationType type)
         {
             base.DidDeactivate(type);
         }

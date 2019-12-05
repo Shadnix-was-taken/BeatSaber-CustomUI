@@ -10,7 +10,7 @@ using CustomUI.Utilities;
 using CustomUI.Settings;
 using CustomUI.BeatSaber;
 using UnityEngine.UI;
-
+using HMUI;
 namespace CustomUI.GameplaySettings
 {
     public enum GameplaySettingsPanels

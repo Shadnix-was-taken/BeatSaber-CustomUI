@@ -8,7 +8,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Linq;
-using VRUI;
+using HMUI;
 using IPA.Config;
 
 namespace CustomUI.MenuButton

@@ -9,8 +9,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using VRUI;
-
+using HMUI;
 namespace CustomUI.BeatSaber
 {
     public static class BeatSaberUIExtensions
@@ -44,62 +43,62 @@ namespace CustomUI.BeatSaber
 
         public static void SetButtonIcon(this Button _button, Sprite _icon)
         {
-            if (_button.GetComponentsInChildren<Image>().Count() > 1)
-                _button.GetComponentsInChildren<Image>().First(x => x.name == "Icon").sprite = _icon;
+            if (_button.GetComponentsInChildren<UnityEngine.UI.Image>().Count() > 1)
+                _button.GetComponentsInChildren<UnityEngine.UI.Image>().First(x => x.name == "Icon").sprite = _icon;
         }
 
         public static void SetButtonBackground(this Button _button, Sprite _background)
         {
-            if (_button.GetComponentsInChildren<Image>().Count() > 0)
-                _button.GetComponentsInChildren<Image>()[0].sprite = _background;
+            if (_button.GetComponentsInChildren<UnityEngine.UI.Image>().Count() > 0)
+                _button.GetComponentsInChildren<UnityEngine.UI.Image>()[0].sprite = _background;
         }
         #endregion
 
         #region ViewController Extensions
 
-        public static Button CreateUIButton(this VRUIViewController parent, string buttonTemplate)
+        public static Button CreateUIButton(this ViewController parent, string buttonTemplate)
         {
             Button btn = BeatSaberUI.CreateUIButton(parent.rectTransform, buttonTemplate);
             return btn;
         }
 
-        public static Button CreateUIButton(this VRUIViewController parent, string buttonTemplate, Vector2 anchoredPosition, Vector2 sizeDelta, UnityAction onClick = null, string buttonText = "BUTTON", Sprite icon = null)
+        public static Button CreateUIButton(this ViewController parent, string buttonTemplate, Vector2 anchoredPosition, Vector2 sizeDelta, UnityAction onClick = null, string buttonText = "BUTTON", Sprite icon = null)
         {
             Button btn = BeatSaberUI.CreateUIButton(parent.rectTransform, buttonTemplate, anchoredPosition, sizeDelta, onClick, buttonText, icon);
             return btn;
         }
 
-        public static Button CreateUIButton(this VRUIViewController parent, string buttonTemplate, Vector2 anchoredPosition, UnityAction onClick = null, string buttonText = "BUTTON", Sprite icon = null)
+        public static Button CreateUIButton(this ViewController parent, string buttonTemplate, Vector2 anchoredPosition, UnityAction onClick = null, string buttonText = "BUTTON", Sprite icon = null)
         {
             Button btn = BeatSaberUI.CreateUIButton(parent.rectTransform, buttonTemplate, anchoredPosition, onClick, buttonText, icon);
             return btn;
         }
 
-        public static Button CreateUIButton(this VRUIViewController parent, string buttonTemplate, UnityAction onClick = null, string buttonText = "BUTTON", Sprite icon = null)
+        public static Button CreateUIButton(this ViewController parent, string buttonTemplate, UnityAction onClick = null, string buttonText = "BUTTON", Sprite icon = null)
         {
             Button btn = BeatSaberUI.CreateUIButton(parent.rectTransform, buttonTemplate, onClick, buttonText, icon);
             return btn;
         }
 
-        public static Button CreateBackButton(this VRUIViewController parent)
+        public static Button CreateBackButton(this ViewController parent)
         {
             Button btn = BeatSaberUI.CreateBackButton(parent.rectTransform);
             return btn;
         }
 
-        public static GameObject CreateLoadingSpinner(this VRUIViewController parent)
+        public static GameObject CreateLoadingSpinner(this ViewController parent)
         {
             GameObject loadingSpinner = BeatSaberUI.CreateLoadingSpinner(parent.rectTransform);
             return loadingSpinner;
         }
 
-        public static TextMeshProUGUI CreateText(this VRUIViewController parent, string text, Vector2 anchoredPosition, Vector2 sizeDelta)
+        public static TextMeshProUGUI CreateText(this ViewController parent, string text, Vector2 anchoredPosition, Vector2 sizeDelta)
         {
             TextMeshProUGUI textMesh = BeatSaberUI.CreateText(parent.rectTransform, text, anchoredPosition, sizeDelta);
             return textMesh;
         }
 
-        public static TextMeshProUGUI CreateText(this VRUIViewController parent, string text, Vector2 anchoredPosition)
+        public static TextMeshProUGUI CreateText(this ViewController parent, string text, Vector2 anchoredPosition)
         {
             TextMeshProUGUI textMesh = BeatSaberUI.CreateText(parent.rectTransform, text, anchoredPosition);
             return textMesh;
@@ -126,13 +125,13 @@ namespace CustomUI.BeatSaber
             cell.GetPrivateField<RawImage>("_coverRawImage").texture = icon;
         }
 
-        public static CustomSlider CreateUISlider(this VRUIViewController parent, float min, float max, float increment, bool intValues, UnityAction<float> onValueChanged = null)
+        public static CustomSlider CreateUISlider(this ViewController parent, float min, float max, float increment, bool intValues, UnityAction<float> onValueChanged = null)
         {
             CustomSlider scrollbar = BeatSaberUI.CreateUISlider(parent.rectTransform, min, max, increment, intValues, onValueChanged);
             return scrollbar;
         }
 
-        public static ColorPicker CreateColorPicker(this VRUIViewController parent, Vector2 anchoredPosition, Vector2 sizeDelta)
+        public static ColorPicker CreateColorPicker(this ViewController parent, Vector2 anchoredPosition, Vector2 sizeDelta)
         {
             ColorPicker colorPicker = BeatSaberUI.CreateColorPicker(parent.rectTransform, anchoredPosition, sizeDelta);
             return colorPicker;

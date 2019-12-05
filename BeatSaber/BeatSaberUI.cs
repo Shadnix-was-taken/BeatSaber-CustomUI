@@ -8,7 +8,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using VRUI;
 using Image = UnityEngine.UI.Image;
 
 namespace CustomUI.BeatSaber
@@ -224,11 +223,11 @@ namespace CustomUI.BeatSaber
         }
 
         /// <summary>
-        /// Creates a VRUIViewController of type T, and marks it to not be destroyed.
+        /// Creates a ViewController of type T, and marks it to not be destroyed.
         /// </summary>
-        /// <typeparam name="T">The variation of VRUIViewController you want to create.</typeparam>
-        /// <returns>The newly created VRUIViewController of type T.</returns>
-        public static T CreateViewController<T>() where T : VRUIViewController
+        /// <typeparam name="T">The variation of ViewController you want to create.</typeparam>
+        /// <returns>The newly created ViewController of type T.</returns>
+        public static T CreateViewController<T>() where T : ViewController
         {
             T vc = new GameObject("CustomViewController").AddComponent<T>();
             DontDestroyOnLoad(vc.gameObject);

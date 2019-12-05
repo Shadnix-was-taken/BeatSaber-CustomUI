@@ -7,7 +7,6 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using VRUI;
 using Image = UnityEngine.UI.Image;
 
 namespace CustomUI.BeatSaber
@@ -48,7 +47,7 @@ namespace CustomUI.BeatSaber
         public CustomViewController bottomViewController = null;
         
         private Action<bool> _dismissCustom = null;
-        private Dictionary<ViewControllerPosition, List<VRUIViewController>> _viewControllerStacks = new Dictionary<ViewControllerPosition, List<VRUIViewController>>();
+        private Dictionary<ViewControllerPosition, List<ViewController>> _viewControllerStacks = new Dictionary<ViewControllerPosition, List<ViewController>>();
 
         /// <summary>
         /// Sets up the main CustomViewController.
@@ -57,7 +56,7 @@ namespace CustomUI.BeatSaber
         /// <param name="includeBackButton">Whether or not to generate a back button.</param>
         /// <param name="DidActivate">Optional, a callback when the ViewController becomes active (when you open it).</param>
         /// <param name="DidDeactivate">Optional, a callback when the ViewController becomes inactive (when you close it).</param>
-        public void SetMainViewController(CustomViewController viewController, bool includeBackButton, Action<bool, VRUIViewController.ActivationType> DidActivate = null, Action<VRUIViewController.DeactivationType> DidDeactivate = null)
+        public void SetMainViewController(CustomViewController viewController, bool includeBackButton, Action<bool, ViewController.ActivationType> DidActivate = null, Action<ViewController.DeactivationType> DidDeactivate = null)
         {
             mainViewController = viewController;
             mainViewController.includeBackButton = includeBackButton;
@@ -74,7 +73,7 @@ namespace CustomUI.BeatSaber
         /// <param name="includeBackButton">Whether or not to generate a back button.</param>
         /// <param name="DidActivate">Optional, a callback when the ViewController becomes active (when you open it).</param>
         /// <param name="DidDeactivate">Optional, a callback when the ViewController becomes inactive (when you close it).</param>
-        public void SetLeftViewController(CustomViewController viewController, bool includeBackButton, Action<bool, VRUIViewController.ActivationType> DidActivate = null, Action<VRUIViewController.DeactivationType> DidDeactivate = null)
+        public void SetLeftViewController(CustomViewController viewController, bool includeBackButton, Action<bool, ViewController.ActivationType> DidActivate = null, Action<ViewController.DeactivationType> DidDeactivate = null)
         {
             leftViewController = viewController;
             leftViewController.includeBackButton = includeBackButton;
@@ -91,7 +90,7 @@ namespace CustomUI.BeatSaber
         /// <param name="includeBackButton">Whether or not to generate a back button.</param>
         /// <param name="DidActivate">Optional, a callback when the ViewController becomes active (when you open it).</param>
         /// <param name="DidDeactivate">Optional, a callback when the ViewController becomes inactive (when you close it).</param>
-        public void SetRightViewController(CustomViewController viewController, bool includeBackButton, Action<bool, VRUIViewController.ActivationType> DidActivate = null, Action<VRUIViewController.DeactivationType> DidDeactivate = null)
+        public void SetRightViewController(CustomViewController viewController, bool includeBackButton, Action<bool, ViewController.ActivationType> DidActivate = null, Action<ViewController.DeactivationType> DidDeactivate = null)
         {
             rightViewController = viewController;
             rightViewController.includeBackButton = includeBackButton;
@@ -108,7 +107,7 @@ namespace CustomUI.BeatSaber
         /// <param name="includeBackButton">Whether or not to generate a back button.</param>
         /// <param name="DidActivate">Optional, a callback when the ViewController becomes active (when you open it).</param>
         /// <param name="DidDeactivate">Optional, a callback when the ViewController becomes inactive (when you close it).</param>
-        public void SetBottomViewController(CustomViewController viewController, bool includeBackButton, Action<bool, VRUIViewController.ActivationType> DidActivate = null, Action<VRUIViewController.DeactivationType> DidDeactivate = null)
+        public void SetBottomViewController(CustomViewController viewController, bool includeBackButton, Action<bool, ViewController.ActivationType> DidActivate = null, Action<ViewController.DeactivationType> DidDeactivate = null)
         {
             bottomViewController = viewController;
             bottomViewController.includeBackButton = includeBackButton;
@@ -144,11 +143,11 @@ namespace CustomUI.BeatSaber
             {
                 _dismissCustom = null;
                 if (leftViewController)
-                    SetScreen(_activeFlowCoordinator, leftViewController, _activeFlowCoordinator.leftScreenViewController, ViewControllerPosition.Left, immediately);
+                    SetScreen(_activeFlowCoordinator, leftViewController, _activeFlowCoordinator.GetField<ViewController>("_leftScreenViewController"), ViewControllerPosition.Left, immediately);
                 if (rightViewController)
-                    SetScreen(_activeFlowCoordinator, rightViewController, _activeFlowCoordinator.rightScreenViewController, ViewControllerPosition.Right, immediately);
+                    SetScreen(_activeFlowCoordinator, rightViewController, _activeFlowCoordinator.GetField<ViewController>("_rightScreenViewController"), ViewControllerPosition.Right, immediately);
                 if(bottomViewController)
-                    SetScreen(_activeFlowCoordinator, bottomViewController, _activeFlowCoordinator.bottomScreenViewController, ViewControllerPosition.Bottom, immediately);
+                    SetScreen(_activeFlowCoordinator, bottomViewController, _activeFlowCoordinator.GetField<ViewController>("_bottomScreenViewController"), ViewControllerPosition.Bottom, immediately);
             }
             return true;
         }
@@ -178,9 +177,19 @@ namespace CustomUI.BeatSaber
             Dismiss(false);
         }
 
+        internal static GameScenesManager gameScenesManager
+        {
+            get
+            {
+                if (_gameScenesManager == null)
+                    _gameScenesManager = Resources.FindObjectsOfTypeAll<GameScenesManager>().FirstOrDefault();
+                return _gameScenesManager;
+            }
+        }
+        private static GameScenesManager _gameScenesManager;
         private FlowCoordinator GetActiveFlowCoordinator()
         {
-            if (GameScenesManagerSO.IsInTransition) return null;
+            if (gameScenesManager.isInTransition) return null;
 
             FlowCoordinator[] flowCoordinators = Resources.FindObjectsOfTypeAll<FlowCoordinator>();
             foreach (FlowCoordinator f in flowCoordinators)
@@ -191,14 +200,14 @@ namespace CustomUI.BeatSaber
             return null;
         }
 
-        private VRUIViewController PopViewControllerStack(ViewControllerPosition pos)
+        private ViewController PopViewControllerStack(ViewControllerPosition pos)
         {
-            VRUIViewController viewController = _viewControllerStacks[pos].Last();
+            ViewController viewController = _viewControllerStacks[pos].Last();
             _viewControllerStacks[pos].Remove(viewController);
             return viewController; 
         }
 
-        private void SetViewController(FlowCoordinator flowCoordinator, VRUIViewController viewController, ViewControllerPosition pos, bool immediate)
+        private void SetViewController(FlowCoordinator flowCoordinator, ViewController viewController, ViewControllerPosition pos, bool immediate)
         {
             string method = string.Empty;
             switch(pos)
@@ -218,14 +227,14 @@ namespace CustomUI.BeatSaber
             flowCoordinator.InvokePrivateMethod(method, new object[] { viewController, immediate });
         }
 
-        private void SetScreen(FlowCoordinator _activeFlowCoordinator, CustomViewController newViewController, VRUIViewController origViewController, ViewControllerPosition pos, bool immediately)
+        private void SetScreen(FlowCoordinator _activeFlowCoordinator, CustomViewController newViewController, ViewController origViewController, ViewControllerPosition pos, bool immediately)
         {
             Action<bool> backAction = (immediate) => SetViewController(_activeFlowCoordinator, PopViewControllerStack(pos), pos, immediate);
             _dismissCustom += backAction;  // custom back button behavior
             if (!newViewController.isActivated)
             {
                 if (!_viewControllerStacks.ContainsKey(pos))
-                    _viewControllerStacks[pos] = new List<VRUIViewController>();
+                    _viewControllerStacks[pos] = new List<ViewController>();
 
                 _viewControllerStacks[pos].Add(origViewController);
                 if (newViewController.includeBackButton)

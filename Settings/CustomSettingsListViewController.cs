@@ -25,7 +25,7 @@ namespace CustomUI.Settings
         private static TableCell _settingsTableCellInstance;
         private static Button pageUpButton, pageDownButton;
         
-        protected override void DidActivate(bool firstActivation, ActivationType type)
+        protected override void DidActivate(bool firstActivation, ViewController.ActivationType type)
         { 
             try
             {
@@ -118,7 +118,7 @@ namespace CustomUI.Settings
             _submenuOptions.Add(option);
         }
 
-        protected override void DidDeactivate(DeactivationType type)
+        protected override void DidDeactivate(ViewController.DeactivationType type)
         {
             base.DidDeactivate(type);
         }

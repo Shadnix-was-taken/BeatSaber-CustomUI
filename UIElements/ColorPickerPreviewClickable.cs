@@ -37,7 +37,7 @@ namespace CustomUI.UIElements
             {
                 _CustomMenu.SetMainViewController(_CustomViewController, false, (firstActivation, type) =>
                 {
-                    if (firstActivation && type == VRUI.VRUIViewController.ActivationType.AddedToHierarchy)
+                    if (firstActivation && type == HMUI.ViewController.ActivationType.AddedToHierarchy)
                     {
                         _ColorPickerSettings = _CustomViewController.CreateColorPicker(new Vector2(0, -5), new Vector2(0.7f, 0.7f));
                         if (_ColorPickerSettings != null)
@@ -52,7 +52,7 @@ namespace CustomUI.UIElements
             }
         }
 
-        private void _UpdatingPreviewClickableColor(VRUI.VRUIViewController.DeactivationType deactivationType)
+        private void _UpdatingPreviewClickableColor(HMUI.ViewController.DeactivationType deactivationType)
         {
             if (ImagePreview != null && _ColorPickerSettings != null && ColorPicker.ColorPickerPreview != null && ColorPicker.ColorPickerPreview.ImagePreview != null)
                 ImagePreview.color = ColorPicker.ColorPickerPreview.ImagePreview.color;

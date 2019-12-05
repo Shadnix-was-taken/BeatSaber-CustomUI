@@ -42,7 +42,7 @@ namespace CustomUI
             _harmonyInstance = HarmonyInstance.Create("com.brian91292.beatsaber.customui");
             _harmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
 
-            BSEvents.OnLoad();
+       //     BSEvents.OnLoad();
         }
 
         public void OnApplicationQuit()

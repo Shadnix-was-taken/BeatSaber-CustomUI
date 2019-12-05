@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VRUI;
+using HMUI;
 
 namespace CustomUI.BeatSaber
 {
@@ -20,7 +20,7 @@ namespace CustomUI.BeatSaber
         /// </summary>
         public CustomMenu customPanel;
 
-        protected override void DidActivate(bool firstActivation, ActivationType activationType)
+        protected override void DidActivate(bool firstActivation, FlowCoordinator.ActivationType activationType)
         {
             // Set the panel title
             title = customPanel.title;
@@ -36,7 +36,7 @@ namespace CustomUI.BeatSaber
                 ProvideInitialViewControllers(customPanel.mainViewController, customPanel.leftViewController, customPanel.rightViewController, customPanel.bottomViewController);
         }
 
-        protected override void DidDeactivate(DeactivationType deactivationType)
+        protected override void DidDeactivate(FlowCoordinator.DeactivationType deactivationType)
         {
         }
 

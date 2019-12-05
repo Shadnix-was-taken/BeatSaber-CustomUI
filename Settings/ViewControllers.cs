@@ -220,13 +220,14 @@ namespace CustomUI.Settings
                 base.OnEnable();
         }
 
-        protected override void GetInitValues(out int idx, out int numberOfElements)
+        protected override bool GetInitValues(out int idx, out int numberOfElements)
         {
             numberOfElements = 2;
             idx = 0;
-            if (_hasInited) return;
+            if (_hasInited) return true;
             _hasInited = true;
             value = GetValue();
+            return true;
         }
 
         protected override void ApplyValue(int idx)
@@ -292,13 +293,14 @@ namespace CustomUI.Settings
                 base.OnEnable();
         }
 
-        protected override void GetInitValues(out int idx, out int numberOfElements)
+        protected override bool GetInitValues(out int idx, out int numberOfElements)
         {
             numberOfElements = values.Count();
             var value = GetValue();
             idx = values.FindIndex(v => v == value);
             if (idx == -1)
                 idx = 0;
+            return true;
         }
 
         protected override void ApplyValue(int idx)
@@ -363,13 +365,14 @@ namespace CustomUI.Settings
                 base.OnEnable();
         }
 
-        protected override void GetInitValues(out int idx, out int numberOfElements)
+        protected override bool GetInitValues(out int idx, out int numberOfElements)
         {
             numberOfElements = values.Count;
             var value = GetValue();
 
             numberOfElements = values.Count();
             idx = values.FindIndex(v => v.Equals(value));
+            return true;
         }
 
         protected override void ApplyValue(int idx)
@@ -597,12 +600,13 @@ namespace CustomUI.Settings
             segmentedControl.SelectCellWithNumber(lastVal);
         }
 
-        protected override void GetInitValues(out int idx, out int numberOfElements)
+        protected override bool GetInitValues(out int idx, out int numberOfElements)
         {
             numberOfElements = segmentedControl.dataSource.NumberOfCells();
             idx = GetValue();
             if (idx == -1)
                 idx = 0;
+            return true;
         }
 
         protected override void ApplyValue(int idx)

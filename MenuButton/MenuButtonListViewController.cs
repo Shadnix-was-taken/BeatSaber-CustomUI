@@ -22,7 +22,7 @@ namespace CustomUI.MenuButton
         TableCell _modListTableCellInstance;
         public event Action<MenuButton> pinButtonPushed;
 
-        protected override void DidActivate(bool firstActivation, ActivationType type)
+        protected override void DidActivate(bool firstActivation, ViewController.ActivationType type)
         {
             try
             {

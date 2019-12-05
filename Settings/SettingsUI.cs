@@ -11,7 +11,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using VRUI;
+using HMUI;
 using Image = UnityEngine.UI.Image;
 using static HMUI.VerticalScrollIndicator;
 using System.Collections;
@@ -54,7 +54,7 @@ namespace CustomUI.Settings
             DontDestroyOnLoad(this.gameObject);
 
             SceneManager.activeSceneChanged += SceneManagerOnActiveSceneChanged;
-            BSEvents.menuSceneLoadedFresh += BSEvents_menuSceneLoadedFresh;
+    //        BSEvents.menuSceneLoadedFresh += BSEvents_menuSceneLoadedFresh;
             StartCoroutine(InitSettings());
 
         }
@@ -62,7 +62,7 @@ namespace CustomUI.Settings
         void OnDestroy()
         {
             SceneManager.activeSceneChanged -= SceneManagerOnActiveSceneChanged;
-            BSEvents.menuSceneLoadedFresh -= BSEvents_menuSceneLoadedFresh;
+    //        BSEvents.menuSceneLoadedFresh -= BSEvents_menuSceneLoadedFresh;
         }
 
         private void BSEvents_menuSceneLoadedFresh()
@@ -190,7 +190,7 @@ namespace CustomUI.Settings
                 subMenuGameObject.name = name.Replace(" ", "");
                 Transform mainContainer = CleanScreen(subMenuGameObject.transform);
 
-                DestroyImmediate(subMenuGameObject.GetComponent<VRUIViewController>());
+                DestroyImmediate(subMenuGameObject.GetComponent<ViewController>());
                 var customSettingsViewController = subMenuGameObject.AddComponent<CustomSettingsListViewController>();
                 customSettingsViewController.name = name.Replace(" ", "");
                 customSettingsViewController.includePageButtons = false;
